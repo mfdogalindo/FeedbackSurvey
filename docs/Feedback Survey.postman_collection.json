@@ -224,6 +224,53 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"id\": 2,\n    \"name\": \"encuesta\",\n    \"campaignCode\": \"test001\",\n    \"enabled\": false,\n    \"description\": \"Encuesta de evaluación\",\n    \"questions\": [\n        {\n            \"id\": 52,\n            \"question\": \"Pregunta relevante?\",\n            \"type\": \"CHECKBOX\",\n            \"options\": [\n                \"Si\",\n                \"No\"\n            ]\n        }\n    ]\n}"
+				},
+				{
+					"name": "Find by Id - Err no results",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/surveys/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"surveys",
+								"5"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Jan 2023 17:06:16 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "No survey found for id: 5"
 				}
 			]
 		},
@@ -319,7 +366,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"other@example.com\",\n    \"surveyId\" : 1,\n    \"questionAnswers\" : [\n        {\n            \"questionId\": 1,\n            \"answers\" : [\"No\"]\n        },\n        {\n            \"questionId\":3,\n            \"answers\": [\"Azul\"]\n        }\n    ] \n}",
+					"raw": "{\n    \"email\": \"bad@bunny.com\",\n    \"surveyId\" : 1,\n    \"questionAnswers\" : [\n        {\n            \"questionId\": 1,\n            \"answers\" : [\"No\"]\n        },\n        {\n            \"questionId\":2,\n            \"answers\": [\"Verde\"]\n        }\n    ] \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -570,7 +617,7 @@
 					"variable": [
 						{
 							"key": "email",
-							"value": "other@example.com"
+							"value": "superuser@example.com"
 						}
 					]
 				}
@@ -632,6 +679,63 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"id\": 202,\n        \"email\": \"other@example.com\",\n        \"question\": {\n            \"id\": 1,\n            \"question\": \"Consideras relevante la encuesta?\",\n            \"type\": \"CHECKBOX\",\n            \"options\": [\n                \"Si\",\n                \"No\"\n            ]\n        },\n        \"answers\": [\n            \"No\"\n        ]\n    },\n    {\n        \"id\": 203,\n        \"email\": \"other@example.com\",\n        \"question\": {\n            \"id\": 2,\n            \"question\": \"Qué color prefieres?\",\n            \"type\": \"MULTIPLE_CHOICE\",\n            \"options\": [\n                \"Rojo\",\n                \"Azul\",\n                \"Verde\"\n            ]\n        },\n        \"answers\": [\n            \"Verde\"\n        ]\n    }\n]"
+				},
+				{
+					"name": "Find Answers By User - No results",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/answers/:email",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"answers",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "other@example.comx"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Disposition",
+							"value": "inline;filename=f.txt"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Jan 2023 15:32:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "No answers found for email: other@example.comx"
 				}
 			]
 		}
