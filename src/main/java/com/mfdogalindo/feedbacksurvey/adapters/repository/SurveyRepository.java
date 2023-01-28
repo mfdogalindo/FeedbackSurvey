@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -20,4 +21,6 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     @Query("SELECT s FROM Survey s WHERE s.enabled = 1")
     List<Survey> findAllEnabled();
+
+    Optional<Survey> findByIdAndEnabledTrue(Long id);
 }

@@ -12,8 +12,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="questions")
-public class Questions {
+@Table(name = "questions")
+public class Question {
 
     @Id
     @GeneratedValue

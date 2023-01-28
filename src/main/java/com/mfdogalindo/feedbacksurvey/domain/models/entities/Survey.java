@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="survey")
+@Table(name = "survey")
 public class Survey {
     @Id
     @GeneratedValue
@@ -29,8 +29,8 @@ public class Survey {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true ,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "survey_id")
-    private List<Questions> questions;
+    private List<Question> questions;
 
 }
