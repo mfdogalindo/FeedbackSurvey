@@ -12,7 +12,7 @@ public class SurveyControllerImpl implements SurveyController{
 
     private final SurveyService surveyService;
 
-    SurveyControllerImpl(SurveyService surveyService){
+    public SurveyControllerImpl(SurveyService surveyService){
         this.surveyService = surveyService;
     }
 
@@ -35,7 +35,7 @@ public class SurveyControllerImpl implements SurveyController{
 
     @Override
     @DeleteMapping(value = "/{id}", produces = "application/json")
-    public void deleteSurvey(@PathVariable Long id){
-        surveyService.deleteSurvey(id);
+    public boolean deleteSurvey(@PathVariable Long id){
+        return surveyService.deleteSurvey(id);
     }
 }

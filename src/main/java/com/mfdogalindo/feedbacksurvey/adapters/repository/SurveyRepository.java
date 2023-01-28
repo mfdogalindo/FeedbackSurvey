@@ -17,7 +17,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     @Modifying
     @Query("update Survey s SET s.enabled = :enabled WHERE s.id = :id")
-    void updateEnabledById(@Param("id") Long id, @Param("enabled") boolean b);
+    int updateEnabledById(@Param("id") Long id, @Param("enabled") boolean b);
 
     @Query("SELECT s FROM Survey s WHERE s.enabled = 1")
     List<Survey> findAllEnabled();

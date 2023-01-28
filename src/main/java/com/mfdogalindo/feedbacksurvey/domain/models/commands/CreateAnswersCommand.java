@@ -1,12 +1,14 @@
 package com.mfdogalindo.feedbacksurvey.domain.models.commands;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Setter
 @Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateAnswersCommand {
 
     private String email;

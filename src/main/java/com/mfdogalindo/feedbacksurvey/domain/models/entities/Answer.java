@@ -3,15 +3,15 @@ package com.mfdogalindo.feedbacksurvey.domain.models.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "answer")
 public class Answer {

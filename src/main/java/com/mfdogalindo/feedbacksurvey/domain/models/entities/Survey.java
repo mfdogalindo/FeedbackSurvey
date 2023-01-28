@@ -1,15 +1,15 @@
 package com.mfdogalindo.feedbacksurvey.domain.models.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "survey")
 public class Survey {
@@ -24,7 +24,7 @@ public class Survey {
     private String campaignCode;
 
     @Column(nullable = false)
-    private boolean enabled = true;
+    private boolean enabled;
 
     @Column(nullable = false)
     private String description;

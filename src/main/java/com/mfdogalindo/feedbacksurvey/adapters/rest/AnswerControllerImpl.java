@@ -13,13 +13,13 @@ public class AnswerControllerImpl implements AnswerController {
 
     private final AnswerService answerService;
 
-    AnswerControllerImpl(AnswerService answerService) {
+    public AnswerControllerImpl(AnswerService answerService) {
         this.answerService = answerService;
     }
 
     @Override
     @PostMapping(produces = "application/json", consumes = "application/json")
-    public int save(@RequestBody CreateAnswersCommand answersCmd) {
+    public long save(@RequestBody CreateAnswersCommand answersCmd) {
         return this.answerService.save(answersCmd);
     }
 

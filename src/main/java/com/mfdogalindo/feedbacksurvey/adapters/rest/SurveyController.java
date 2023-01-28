@@ -35,7 +35,7 @@ public interface SurveyController {
      * @param id Id of the survey to delete
      * @return Survey deleted
      */
-    void deleteSurvey(Long id);
+    boolean deleteSurvey(Long id);
 
 
 }

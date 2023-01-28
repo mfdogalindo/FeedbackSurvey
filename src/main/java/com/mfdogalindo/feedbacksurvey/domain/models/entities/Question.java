@@ -2,15 +2,15 @@ package com.mfdogalindo.feedbacksurvey.domain.models.entities;
 
 import com.mfdogalindo.feedbacksurvey.domain.models.enums.QuestionType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -23,10 +23,10 @@ public class Question {
     private String question;
 
     @Column(nullable = false)
-    private QuestionType type = QuestionType.CHECKBOX;
+    private QuestionType type;
 
     @Column(nullable = false)
-    private List<String> options = List.of("Si", "No");
+    private List<String> options;
 
 
 }

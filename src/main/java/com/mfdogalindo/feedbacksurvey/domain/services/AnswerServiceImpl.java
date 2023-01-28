@@ -4,6 +4,7 @@ import com.mfdogalindo.feedbacksurvey.adapters.repository.AnswerRepository;
 import com.mfdogalindo.feedbacksurvey.adapters.repository.QuestionRepository;
 import com.mfdogalindo.feedbacksurvey.adapters.repository.SurveyRepository;
 import com.mfdogalindo.feedbacksurvey.domain.exceptions.AnswerNotValidException;
+import com.mfdogalindo.feedbacksurvey.domain.exceptions.NoResultsException;
 import com.mfdogalindo.feedbacksurvey.domain.exceptions.QuestionNotFoundException;
 import com.mfdogalindo.feedbacksurvey.domain.exceptions.SurveyNotFoundException;
 import com.mfdogalindo.feedbacksurvey.domain.models.commands.CreateAnswersCommand;
@@ -32,27 +33,32 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public int save(CreateAnswersCommand answersCmd) {
+    public long save(CreateAnswersCommand answersCmd) {
         Survey currentSurvey = this.getSurvey(answersCmd.getSurveyId());
         List<Answer> toInsert = answersCmd.getQuestionAnswers().stream().map(questionAnswer -> {
             Question currentQuestion = this.getQuestion(questionAnswer.getQuestionId());
-            Answer answer = new Answer();
-            answer.setEmail(answersCmd.getEmail());
-            answer.setSurvey(currentSurvey);
-            answer.setQuestion(currentQuestion);
             this.validateAnswers(currentQuestion, questionAnswer);
-            answer.setAnswers(questionAnswer.getAnswers());
+            Answer answer = Answer.builder()
+                    .survey(currentSurvey)
+                    .email(answersCmd.getEmail())
+                    .question(currentQuestion)
+                    .answers(questionAnswer.getAnswers())
+                    .build();
             return answer;
         }).toList();
 
-        toInsert.forEach(answerRepository::save);
+        List<Answer> inserted = toInsert.stream().map(answerRepository::save).toList();
 
-        return toInsert.size() == answersCmd.getQuestionAnswers().size() ? toInsert.size() : 0 ;
+        return inserted.size() == answersCmd.getQuestionAnswers().size() ? inserted.size() : 0 ;
     }
 
     @Override
     public List<Answer> findByEmail(String email) {
-        return this.answerRepository.findByEmail(email);
+        List<Answer> results = this.answerRepository.findByEmail(email);
+        if(results.isEmpty()){
+            throw new NoResultsException("No answers found for email: " + email);
+        }
+        return results;
     }
 
     @Override

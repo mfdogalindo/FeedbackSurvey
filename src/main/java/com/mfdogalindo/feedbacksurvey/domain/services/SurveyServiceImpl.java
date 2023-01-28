@@ -1,6 +1,7 @@
 package com.mfdogalindo.feedbacksurvey.domain.services;
 
 import com.mfdogalindo.feedbacksurvey.adapters.repository.SurveyRepository;
+import com.mfdogalindo.feedbacksurvey.domain.exceptions.NoResultsException;
 import com.mfdogalindo.feedbacksurvey.domain.models.entities.Survey;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,8 @@ public class SurveyServiceImpl implements SurveyService{
 
     @Override
     public Survey getSurvey(Long id) {
-        return this.surveyRepository.findById(id).orElse(null);
+        return this.surveyRepository.findById(id)
+                .orElseThrow(() -> new NoResultsException("No survey found for id: " + id));
     }
 
     @Override
@@ -30,7 +32,11 @@ public class SurveyServiceImpl implements SurveyService{
     }
 
     @Override
-    public void deleteSurvey(Long id) {
-        this.surveyRepository.updateEnabledById(id, false);
+    public boolean deleteSurvey(Long id) {
+        var result = this.surveyRepository.updateEnabledById(id, false);
+        if(result == 0){
+            throw new NoResultsException("No survey found for id: " + id);
+        }
+        return result > 0;
     }
 }

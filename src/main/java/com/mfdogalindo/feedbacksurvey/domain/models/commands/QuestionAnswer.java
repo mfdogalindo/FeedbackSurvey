@@ -1,12 +1,14 @@
 package com.mfdogalindo.feedbacksurvey.domain.models.commands;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
+@Builder
 @Setter
+@Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class QuestionAnswer {
     private Long questionId;
     private List<String> answers;

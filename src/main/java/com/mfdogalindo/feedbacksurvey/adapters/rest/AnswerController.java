@@ -12,7 +12,7 @@ public interface AnswerController {
      * @param answersCmd the answers to be created
      * @return Number of answers created
      */
-    int save(CreateAnswersCommand answersCmd);
+    long save(CreateAnswersCommand answersCmd);
 
     /**
      * Find all the answers for a given email

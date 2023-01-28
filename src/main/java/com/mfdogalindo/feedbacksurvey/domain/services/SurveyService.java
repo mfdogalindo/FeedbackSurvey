@@ -1,5 +1,6 @@
 package com.mfdogalindo.feedbacksurvey.domain.services;
 
+import com.mfdogalindo.feedbacksurvey.domain.exceptions.NoResultsException;
 import com.mfdogalindo.feedbacksurvey.domain.models.entities.Survey;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public interface SurveyService {
      * Get a survey by id
      * @param id Id of the survey
      * @return Survey found
+     * @throws NoResultsException if no survey is found
      */
     Survey getSurvey(Long id);
 
@@ -30,6 +32,7 @@ public interface SurveyService {
      * Update a survey to logic delete
      * @param id Id of the survey to delete
      * @return Survey deleted
+     * @throws NoResultsException if no survey found
      */
-    void deleteSurvey(Long id);
+    boolean deleteSurvey(Long id);
 }

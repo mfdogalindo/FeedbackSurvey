@@ -12,7 +12,7 @@ public interface AnswerService {
      * @param answersCmd the list of answers to save
      * @return Number of answers saved
      */
-    int save(CreateAnswersCommand answersCmd);
+    long save(CreateAnswersCommand answersCmd);
 
     /**
      * Find all answers by email
