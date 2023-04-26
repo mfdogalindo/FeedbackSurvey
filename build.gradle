@@ -2,11 +2,12 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'com.palantir.docker' version '0.35.0'
 }
 
-group = 'com.mfdogalindo'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group = appGroup
+version = appVersion
+sourceCompatibility = appSourceCompatibility
 
 configurations {
 	compileOnly {
@@ -33,4 +34,24 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootJar {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+}
+
+task sourcesJar(type: Jar) {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+java {
+	withJavadocJar()
+	withSourcesJar()
+}
+
+docker {
+	name appImageName
+	files "build/libs/${bootJar.archiveFileName.get()}"
+	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
 }
